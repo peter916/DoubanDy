@@ -12,6 +12,7 @@
 {
     NSDictionary* movieData;
     NSInteger movieSum;
+    NSArray* imageArray;
 }
 
 

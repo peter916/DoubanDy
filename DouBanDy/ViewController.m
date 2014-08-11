@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AFNetworking.h"
+#import "MovieTableViewCell.h"
 
 @interface ViewController ()
 
@@ -41,18 +42,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.title = @"北美电影票房榜";
-    NSString* movieUrl = @"https://api.douban.com/v2/movie/us_box";
     
+    NSString* movieUrl = @"https://api.douban.com/v2/movie/us_box";
+    self.title = @"北美电影票房榜";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:movieUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//        movieData = (NSDictionary*)responseObject;
-        movieData = responseObject;
-        movieSum = [movieData[@"subjects"] count];
+        NSLog(@"JSON: %@", responseObject);
+        movieData = (NSDictionary*)responseObject;
+        self.title = [@"北美电影票房榜" stringByAppendingString:movieData[@"date"]	];
+        
         [self.tableView reloadData];
         
-         NSLog(@"JSON: %d", movieSum);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
@@ -69,20 +70,32 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return movieSum;
+    return [movieData[@"subjects"] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* movieCell = [tableView dequeueReusableCellWithIdentifier:@"movieCell"];
+    MovieTableViewCell* movieCell = [tableView dequeueReusableCellWithIdentifier:@"movieCell"];
     
     if (!movieCell) {
-        movieCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"movieCell"];
+        movieCell = [[MovieTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"movieCell"];
     }
     
-    if (movieSum > 0) {
+    if ([movieData[@"subjects"] count] > 0) {
         NSDictionary* movie = movieData[@"subjects"][indexPath.row];
-        movieCell.textLabel.text = movie[@"title"];
+        movieCell.movieTitleLabel.text = movie[@"subject"][@"title"];
+        NSString* imageUrl = movie[@"subject"][@"images"][@"small"];
+        NSString* points = movie[@"subject"][@"average"];
+        movieCell.moviePointsLabel.text = [points stringByAppendingString:@"分"];
+        NSURL* url = [NSURL URLWithString:imageUrl];
+        NSURLRequest* request = [NSURLRequest requestWithURL:url];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            UIImage* image = [UIImage imageWithData:data];
+            [self->imageArray arrayByAddingObject:image];
+            movieCell.movieImageView.image = image;
+            
+        }];
+        
     }
     
     return movieCell;
