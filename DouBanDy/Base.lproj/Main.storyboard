@@ -13,15 +13,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="78" id="i62-ay-X2z" customClass="MovieTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="78" id="i62-ay-X2z" customClass="MovieTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i62-ay-X2z" id="wZK-Od-Pth">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="77"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uTb-TM-o9S">
-                                            <rect key="frame" x="12" y="4" width="65" height="70"/>
+                                            <rect key="frame" x="12" y="4" width="60" height="70"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cm1-U8-Lvd">
@@ -34,7 +34,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eE-9u-9ub">
                                             <rect key="frame" x="80" y="36" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -43,6 +43,7 @@
                                     <outlet property="movieImageView" destination="uTb-TM-o9S" id="Gd9-3v-C8U"/>
                                     <outlet property="moviePointsLabel" destination="6eE-9u-9ub" id="jCS-o6-5Ra"/>
                                     <outlet property="movieTitleLabel" destination="cm1-U8-Lvd" id="sFT-2j-zO5"/>
+                                    <segue destination="bzQ-Ex-H2h" kind="push" id="iJH-MF-JgV"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -56,6 +57,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kw3-AA-cd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="422" y="-71"/>
+        </scene>
+        <!--Movie View Controller-->
+        <scene sceneID="kGd-Of-A3z">
+            <objects>
+                <viewController storyboardIdentifier="MovieView" id="bzQ-Ex-H2h" customClass="MovieViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HJI-oe-HPR"/>
+                        <viewControllerLayoutGuide type="bottom" id="6Ma-s9-9mN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6m9-87-fEI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z4Z-2Q-UTW">
+                                <rect key="frame" x="10" y="68" width="300" height="268"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Fej-n1-TK3"/>
+                    <connections>
+                        <outlet property="moviePostView" destination="z4Z-2Q-UTW" id="ytM-ob-PqW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HlZ-Hc-Bd3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="868" y="-76"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Uic-5N-S5C">

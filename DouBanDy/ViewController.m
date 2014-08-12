@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "AFNetworking.h"
 #import "MovieTableViewCell.h"
+#import "MovieViewController.h"
 
 @interface ViewController ()
 
@@ -85,8 +86,9 @@
         NSDictionary* movie = movieData[@"subjects"][indexPath.row];
         movieCell.movieTitleLabel.text = movie[@"subject"][@"title"];
         NSString* imageUrl = movie[@"subject"][@"images"][@"small"];
-        NSString* points = movie[@"subject"][@"average"];
-        movieCell.moviePointsLabel.text = [points stringByAppendingString:@"分"];
+        NSNumber* points = movie[@"subject"][@"rating"][@"average"];
+        NSNumberFormatter* formatter =  [[NSNumberFormatter alloc] init];
+        movieCell.moviePointsLabel.text = [[formatter stringFromNumber:points] stringByAppendingString:@"分"];
         NSURL* url = [NSURL URLWithString:imageUrl];
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
@@ -102,6 +104,20 @@
     
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    
+    MovieViewController* movieView = segue.destinationViewController;
+    
+    NSDictionary* movie = movieData[@"subjects"][indexPath.row];
+    movieView.movieTitle = movie[@"subject"][@"title"];
+    movieView.imageUrl = movie[@"subject"][@"images"][@"large"];
+
+}
 
 
 
