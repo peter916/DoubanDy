@@ -43,6 +43,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+   // loading = [[UIActivityIndicatorView alloc] init];
+    [loading startAnimating];
+    [loading setHidesWhenStopped:YES];
     
     NSString* movieUrl = @"https://api.douban.com/v2/movie/us_box";
     self.title = @"北美电影票房榜";
@@ -52,6 +55,7 @@
         movieData = (NSDictionary*)responseObject;
         self.title = [@"北美电影票房榜" stringByAppendingString:movieData[@"date"]	];
         
+        [loading stopAnimating];
         [self.tableView reloadData];
         
         

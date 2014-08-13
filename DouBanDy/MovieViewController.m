@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [_loading startAnimating];
+    [_loading setHidesWhenStopped:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,6 +46,7 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         UIImage* image = [UIImage imageWithData:data];
         self.moviePostView.image = image;
+        [_loading stopAnimating];
         
     }];
 }

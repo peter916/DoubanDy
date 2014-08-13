@@ -13,5 +13,6 @@
 
 @property (retain,nonatomic)NSString* imageUrl;
 @property (retain,nonatomic)NSString* movieTitle;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loading;
 
 @end

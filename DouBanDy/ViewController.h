@@ -14,6 +14,7 @@
     NSInteger movieSum;
     NSArray* imageArray;
 
+    __weak IBOutlet UIActivityIndicatorView *loading;
 }
 
 
