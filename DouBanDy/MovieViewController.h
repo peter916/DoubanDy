@@ -13,6 +13,11 @@
 
 @property (retain,nonatomic)NSString* imageUrl;
 @property (retain,nonatomic)NSString* movieTitle;
+@property (retain,nonatomic)NSString* movieId;
+@property (retain,nonatomic)NSDictionary* movieSubject;
+
+
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loading;
 
+@property (weak, nonatomic) IBOutlet UITextView *summaryView;
 @end

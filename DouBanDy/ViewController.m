@@ -51,7 +51,7 @@
     self.title = @"北美电影票房榜";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:movieUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        
         movieData = (NSDictionary*)responseObject;
         self.title = [@"北美电影票房榜" stringByAppendingString:movieData[@"date"]	];
         
@@ -120,6 +120,7 @@
     NSDictionary* movie = movieData[@"subjects"][indexPath.row];
     movieView.movieTitle = movie[@"subject"][@"title"];
     movieView.imageUrl = movie[@"subject"][@"images"][@"large"];
+    movieView.movieId = movie[@"subject"][@"id"];
 
 }
 

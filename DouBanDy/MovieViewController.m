@@ -5,7 +5,7 @@
 //  Created by peter on 14-8-12.
 //  Copyright (c) 2014年 org.peter. All rights reserved.
 //
-
+#import "AFNetworking.h"
 #import "MovieViewController.h"
 
 @interface MovieViewController ()
@@ -49,6 +49,21 @@
         [_loading stopAnimating];
         
     }];
+    
+    NSString* movieUrl = [@"https://api.douban.com/v2/movie/subject/" stringByAppendingString:self.movieId];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:movieUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        self.movieSubject = (NSDictionary*)responseObject;
+        self.summaryView.text = self.movieSubject[@"summary"];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
