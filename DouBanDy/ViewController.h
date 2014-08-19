@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UITableViewController
+@interface ViewController : UITableViewController<UISearchBarDelegate>
 {
     NSDictionary* movieData;
     NSInteger movieSum;
     NSArray* imageArray;
+    NSString* movieDate;
 
     __weak IBOutlet UIActivityIndicatorView *loading;
 }
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 
 @end

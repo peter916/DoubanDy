@@ -44,16 +44,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
    // loading = [[UIActivityIndicatorView alloc] init];
+    self.searchBar.delegate = self;
     [loading startAnimating];
     [loading setHidesWhenStopped:YES];
     
+    
     NSString* movieUrl = @"https://api.douban.com/v2/movie/us_box";
-    self.title = @"北美电影票房榜";
+    self.title = @"豆瓣电影";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:movieUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         movieData = (NSDictionary*)responseObject;
-        self.title = [@"北美电影票房榜" stringByAppendingString:movieData[@"date"]	];
+        movieDate = movieData[@"date"];
         
         [loading stopAnimating];
         [self.tableView reloadData];
@@ -108,6 +110,16 @@
     
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30L;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"北美电影票房榜";
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
@@ -122,6 +134,33 @@
     movieView.imageUrl = movie[@"subject"][@"images"][@"large"];
     movieView.movieId = movie[@"subject"][@"id"];
 
+}
+
+//search
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"searching");
+    
+    NSString* movieUrl = @"https://api.douban.com/v2/movie/search";
+    NSString* q = searchBar.text;
+    NSDictionary *parameters = @{@"q": q};
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:movieUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        movieData = (NSDictionary*)responseObject;
+        movieDate = movieData[@"date"];
+        
+       // [loading stopAnimating];
+        [self.tableView reloadData];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+    
+    
 }
 
 
