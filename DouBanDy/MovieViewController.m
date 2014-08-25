@@ -7,6 +7,7 @@
 //
 #import "AFNetworking.h"
 #import "MovieViewController.h"
+#import "MovieImageCollectViewController.h"
 
 @interface MovieViewController ()
 
@@ -71,7 +72,7 @@
     
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -79,7 +80,11 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    MovieImageCollectViewController* movieCollectView = segue.destinationViewController;
+    movieCollectView.movieId = self.movieId;
+    
+    
 }
-*/
+
 
 @end

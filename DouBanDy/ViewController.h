@@ -10,14 +10,12 @@
 
 @interface ViewController : UITableViewController<UISearchBarDelegate>
 {
-    NSDictionary* movieData;
+    NSArray* movieData;
     NSInteger movieSum;
     NSArray* imageArray;
     NSString* movieDate;
 
     __weak IBOutlet UIActivityIndicatorView *loading;
 }
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-
 
 @end

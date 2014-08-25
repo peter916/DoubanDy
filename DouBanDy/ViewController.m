@@ -44,7 +44,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
    // loading = [[UIActivityIndicatorView alloc] init];
-    self.searchBar.delegate = self;
     [loading startAnimating];
     [loading setHidesWhenStopped:YES];
     
@@ -54,8 +53,9 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:movieUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        movieData = (NSDictionary*)responseObject;
-        movieDate = movieData[@"date"];
+        NSDictionary* data = (NSDictionary*)responseObject;
+        movieData = data[@"subjects"];
+        movieDate = data[@"date"];
         
         [loading stopAnimating];
         [self.tableView reloadData];
@@ -77,7 +77,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [movieData[@"subjects"] count];
+    return [movieData count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,11 +88,21 @@
         movieCell = [[MovieTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"movieCell"];
     }
     
-    if ([movieData[@"subjects"] count] > 0) {
-        NSDictionary* movie = movieData[@"subjects"][indexPath.row];
-        movieCell.movieTitleLabel.text = movie[@"subject"][@"title"];
-        NSString* imageUrl = movie[@"subject"][@"images"][@"small"];
-        NSNumber* points = movie[@"subject"][@"rating"][@"average"];
+    NSString* imageUrl = nil;
+    NSNumber* points = nil;
+    
+    if ([movieData count] > 0) {
+        NSDictionary* movie = movieData[indexPath.row];
+        if (movie[@"subject"] != nil ) {
+            movieCell.movieTitleLabel.text = movie[@"subject"][@"title"];
+            imageUrl = movie[@"subject"][@"images"][@"small"];
+            points = movie[@"subject"][@"rating"][@"average"];
+        }else{
+            movieCell.movieTitleLabel.text = movie[@"title"];
+            imageUrl = movie[@"images"][@"small"];
+            points = movie[@"rating"][@"average"];
+        }
+        
         NSNumberFormatter* formatter =  [[NSNumberFormatter alloc] init];
         movieCell.moviePointsLabel.text = [[formatter stringFromNumber:points] stringByAppendingString:@"分"];
         NSURL* url = [NSURL URLWithString:imageUrl];
@@ -129,7 +139,7 @@
     
     MovieViewController* movieView = segue.destinationViewController;
     
-    NSDictionary* movie = movieData[@"subjects"][indexPath.row];
+    NSDictionary* movie = movieData[indexPath.row];
     movieView.movieTitle = movie[@"subject"][@"title"];
     movieView.imageUrl = movie[@"subject"][@"images"][@"large"];
     movieView.movieId = movie[@"subject"][@"id"];
@@ -149,8 +159,9 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:movieUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        movieData = (NSDictionary*)responseObject;
-        movieDate = movieData[@"date"];
+        NSDictionary* data = (NSDictionary*)responseObject;
+        movieData = data[@"subjects"];
+  //      movieDate = movieData[@"date"];
         
        // [loading stopAnimating];
         [self.tableView reloadData];
@@ -163,8 +174,10 @@
     
 }
 
-
-
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
 
 
 @end
