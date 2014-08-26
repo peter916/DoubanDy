@@ -22,6 +22,7 @@
 		D00098F21993B2E30051D22B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00098D41993B2E30051D22B /* UIKit.framework */; };
 		D00098FA1993B2E30051D22B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D00098F81993B2E30051D22B /* InfoPlist.strings */; };
 		D00098FC1993B2E30051D22B /* DouBanDyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D00098FB1993B2E30051D22B /* DouBanDyTests.m */; };
+		D016D9C219ACD8CA00795FE2 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D016D9C119ACD8CA00795FE2 /* PhotoViewController.m */; };
 		D096FC16199907FF00746D32 /* MovieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D096FC15199907FF00746D32 /* MovieTableViewCell.m */; };
 		D0A2FDC219AB90FB00604991 /* MovieImageCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A2FDC119AB90FB00604991 /* MovieImageCollectViewController.m */; };
 		D0A2FDC519AB94E800604991 /* MovieCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A2FDC419AB94E800604991 /* MovieCollectionViewCell.m */; };
@@ -60,6 +61,8 @@
 		D00098F71993B2E30051D22B /* DouBanDyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DouBanDyTests-Info.plist"; sourceTree = "<group>"; };
 		D00098F91993B2E30051D22B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D00098FB1993B2E30051D22B /* DouBanDyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DouBanDyTests.m; sourceTree = "<group>"; };
+		D016D9C019ACD8CA00795FE2 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		D016D9C119ACD8CA00795FE2 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		D096FC14199907FF00746D32 /* MovieTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTableViewCell.h; sourceTree = "<group>"; };
 		D096FC15199907FF00746D32 /* MovieTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewCell.m; sourceTree = "<group>"; };
 		D0A2FDC019AB90FB00604991 /* MovieImageCollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieImageCollectViewController.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				D0A2FDC119AB90FB00604991 /* MovieImageCollectViewController.m */,
 				D0A2FDC319AB94E800604991 /* MovieCollectionViewCell.h */,
 				D0A2FDC419AB94E800604991 /* MovieCollectionViewCell.m */,
+				D016D9C019ACD8CA00795FE2 /* PhotoViewController.h */,
+				D016D9C119ACD8CA00795FE2 /* PhotoViewController.m */,
 			);
 			path = DouBanDy;
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D00098E71993B2E30051D22B /* ViewController.m in Sources */,
+				D016D9C219ACD8CA00795FE2 /* PhotoViewController.m in Sources */,
 				D0A63198199A5967007A6D04 /* MovieViewController.m in Sources */,
 				D0A2FDC219AB90FB00604991 /* MovieImageCollectViewController.m in Sources */,
 				D00098E11993B2E30051D22B /* AppDelegate.m in Sources */,

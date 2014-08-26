@@ -58,6 +58,8 @@
         self.movieSubject = (NSDictionary*)responseObject;
         self.summaryView.text = self.movieSubject[@"summary"];
         
+//        NSLog(self.movieSubject[@"id"]);
+        
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

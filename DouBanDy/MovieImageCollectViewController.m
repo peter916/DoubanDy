@@ -8,6 +8,7 @@
 #import "AFNetworking.h"
 #import "MovieImageCollectViewController.h"
 #import "MovieCollectionViewCell.h"
+#import "PhotoViewController.h"
 
 @interface MovieImageCollectViewController ()
 
@@ -32,6 +33,10 @@
     //[self.collectionView registerClass :[MovieCollectionViewCell class] forCellWithReuseIdentifier:@"moviePhoto"];
    // NSLog(self.movieId);
     
+    self.title = @"剧照";
+    [_loading startAnimating];
+    [_loading setHidesWhenStopped:YES];
+    
     NSString* movieUrl = [@"https://api.douban.com/v2/movie/subject/" stringByAppendingString:self.movieId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:movieUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -51,6 +56,10 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [_loading stopAnimating];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -65,6 +74,8 @@
     if ([movieData count] > 0) {
         
         NSDictionary* photo = movieData[indexPath.row];
+        movieCell.castLabel.text = photo[@"name"];
+       // NSLog(photo[@"id"]);
         
         NSURL* url = [NSURL URLWithString:photo[@"avatars"][@"small"]];
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
@@ -92,15 +103,21 @@
 
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    PhotoViewController* photoView = segue.destinationViewController;
+    NSDictionary* photo = movieData[indexPath.row];
+    photoView.photoUrl = photo[@"avatars"][@"large"];
+    photoView.castName = photo[@"name"];
+    
 }
-*/
+
 
 @end

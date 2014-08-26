@@ -13,5 +13,6 @@
     
 }
 @property (weak, nonatomic) IBOutlet UIImageView *movieImageCell;
+@property (weak, nonatomic) IBOutlet UILabel *castLabel;
 
 @end

@@ -13,5 +13,6 @@
     NSArray* movieData;
 }
 @property (retain,nonatomic)NSString* movieId;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loading;
 
 @end
